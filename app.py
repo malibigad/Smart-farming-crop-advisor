@@ -84,7 +84,7 @@ elif menu == "Farm Details":
             st.write("Soil Type:", soil_type)
 
 # Crop Selection
-elif menu == "Crop Selection"
+elif menu == "Crop Selection":
     st.header("🌱 Crop Recommendation")
     from crop import recommend_crops
 

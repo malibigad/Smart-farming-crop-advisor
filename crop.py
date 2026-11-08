@@ -33,7 +33,7 @@ CROP_DATABASE = {
 }
 
 
-def recommend_crops(soil_type):
+def recommend_crops(soil_type, season=None, budget=None):
 
     recommendations = []
 

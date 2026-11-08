@@ -56,16 +56,21 @@ if menu == "Dashboard":
 # Farm Details
 elif menu == "Farm Details":
 
-    st.header("Enter Your Farm Details")
+    st.header("🌾 Farm Registration")
+
+    if "farm_details" not in st.session_state:
+        st.session_state.farm_details = {}
 
     with st.form("farm_form"):
 
         farm_name = st.text_input("Farm Name")
+
         location = st.text_input("Farm Location")
 
         farm_size = st.number_input(
             "Farm Size (hectares)",
-            min_value=0.1
+            min_value=0.1,
+            value=1.0
         )
 
         soil_type = st.selectbox(
@@ -73,16 +78,33 @@ elif menu == "Farm Details":
             ["Loamy", "Clay", "Sandy", "Silty"]
         )
 
-        submitted = st.form_submit_button("Save Farm Details")
+        submitted = st.form_submit_button(
+            "Save Farm Details"
+        )
 
         if submitted:
-            st.success("Farm details submitted successfully!")
 
-            st.write("Farm Name:", farm_name)
-            st.write("Location:", location)
-            st.write("Farm Size:", farm_size)
-            st.write("Soil Type:", soil_type)
+            if farm_name and location:
 
+                st.session_state.farm_details = {
+                    "Farm Name": farm_name,
+                    "Location": location,
+                    "Farm Size": farm_size,
+                    "Soil Type": soil_type
+                }
+
+                st.success("Farm details saved successfully!")
+
+            else:
+                st.warning("Please enter your farm name and location.")
+
+    if st.session_state.farm_details:
+
+        st.subheader("Saved Farm Information")
+
+        for key, value in st.session_state.farm_details.items():
+
+            st.write(f"**{key}:** {value}")
 # Crop Selection
 elif menu == "Crop Selection":
     st.header("🌱 Crop Recommendation")

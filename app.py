@@ -84,29 +84,30 @@ elif menu == "Farm Details":
             st.write("Soil Type:", soil_type)
 
 # Crop Selection
-elif menu == "Crop Selection":
+elif menu == "Crop Selection"
+    st.header("🌱 Crop Recommendation")
+    from crop import recommend_crops
 
-    st.header("Select Your Crop")
-
-    crop = st.selectbox(
-        "Choose a crop",
-        ["Maize", "Rice", "Tomato", "Cassava", "Beans"]
+    soil_type = st.selectbox(
+        "Select your soil type",
+        ["Loamy", "Sandy", "Clay", "Silty"]
     )
 
-    st.success(f"You selected {crop}.")
-
-    st.write("Crop selection will be connected to the crop recommendation module.")
-
-# Weather Information
-elif menu == "Weather Information":
-
-    st.header("Weather Information")
-
-    st.info(
-        "Weather information will be connected "
-        "to the weather API module."
+    season = st.selectbox(
+        "Select season",
+        ["Rainy", "Dry", "Harmattan"]
     )
 
+    budget = st.selectbox(
+        "Your budget",
+        ["Low", "Medium", "High"]
+    )
+
+    if st.button("Recommend Crops"):
+        recommendations = recommend_crops(soil_type, season, budget)
+        st.success("Recommended crops for you:")
+        for crop in recommendations:
+            st.write(f"✅ {crop}")
 # Planting Calendar
 elif menu == "Planting Calendar":
 
